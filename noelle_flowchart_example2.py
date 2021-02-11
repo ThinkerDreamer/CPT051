@@ -7,13 +7,16 @@ n = int(input())
 
 #if N< 0
 if n < 0:
+    #Write negative number
     print("Negative number")
 elif n == 0:
+    #write "ZERO"
     print("Zero")
-else:          
+else:
+    #write "positive number"
     print("Positive number")
-#Write negative number
 
-#write "positive number"
+
+
 
 #end

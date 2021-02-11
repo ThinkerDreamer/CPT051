@@ -1,7 +1,7 @@
 print("What is X?")
-x = input()
+x = int(input())
 print("What is Y?")
-y = input()
+y = int(input())
 
 total = x + y
 

@@ -2,7 +2,7 @@
 #https://www.w3schools.com/python/python_mysql_select.asp
 import mysql.connector
 
-
+#connection
 mydb = mysql.connector.connect(
   host="localhost",
   user="root",
@@ -10,6 +10,7 @@ mydb = mysql.connector.connect(
   database="discord"
 )
 
+#insert
 mycursor = mydb.cursor()
 
 sql = "INSERT INTO firstnames(name) VALUES (%s)"

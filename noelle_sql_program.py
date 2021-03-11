@@ -17,6 +17,12 @@ def take_input():
     menuSelection = menuSelection[0]
     return menuSelection
 
+def take_string(whatis):
+    print("Please give me a " + str(whatis))
+    mystring = input()
+
+    return mystring
+
 def show_menu():
     print("[A] Show all students")
     print("[B] Insert a student")
@@ -31,8 +37,11 @@ def show_all(mycursor):
 
 def insert_student(mycursor):
 
+    
+    myname = take_string("name")
+
     sql = "INSERT INTO firstnames(name) VALUES (%s)"
-    val = ("Taj", )
+    val = (myname, )
 
     mycursor.execute(sql, val)
 

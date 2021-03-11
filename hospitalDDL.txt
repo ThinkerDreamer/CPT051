@@ -1,5 +1,5 @@
-CREATE DATABASE Hospital;
-USE Hospital;
+CREATE DATABASE HospitalPython;
+USE HospitalPython;
 
 CREATE TABLE DOCTOR (
     doc_id integer AUTO_INCREMENT PRIMARY KEY, 

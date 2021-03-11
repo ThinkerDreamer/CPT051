@@ -8,6 +8,7 @@ mydb = mysql.connector.connect(
   database="discord"
 )
 
+mycursor = mydb.cursor()
 
 def take_input():
     print("Enter your selection here")
@@ -20,7 +21,7 @@ def show_menu():
     print("[A] Show all students")
     print("[B] Insert a student")
 
-def show_all():
+def show_all(mycursor):
 
     mycursor.execute("SELECT * FROM firstnames")
     myresult = mycursor.fetchall()
@@ -28,8 +29,7 @@ def show_all():
     for x in myresult:
         print(x)
 
-def insert_student():
-    mycursor = mydb.cursor()
+def insert_student(mycursor):
 
     sql = "INSERT INTO firstnames(name) VALUES (%s)"
     val = ("Taj", )
@@ -48,10 +48,10 @@ while(menu_select != 'Q'):
     menu_select = take_input()
 
     if(menu_select == 'A'):
-        show_all()
+        show_all(mycursor)
     elif(menu_select == 'Q'):
         print("Goodbye")
     elif(menu_select == 'B'):
-        insert_student()
+        insert_student(mycursor)
     else:
         print("How did you get here? Error 1")

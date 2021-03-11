@@ -1,0 +1,64 @@
+CREATE DATABASE Hospital;
+USE Hospital;
+
+CREATE TABLE DOCTOR (
+    doc_id integer AUTO_INCREMENT PRIMARY KEY, 
+    last_name varchar(20) NOT NULL, 
+    first_name varchar(20) NOT NULL, 
+    phone varchar(15) ,
+    spec_num integer NOT NULL,
+    FOREIGN KEY (spec_num) REFERENCES SPECIALTY(spec_num)
+    );
+CREATE TABLE SPECIALTY (
+    spec_num integer AUTO_INCREMENT PRIMARY KEY,
+    specialty_name varchar(20) NOT NULL
+    );
+CREATE TABLE PATIENT (
+    pat_id integer AUTO_INCREMENT PRIMARY KEY, 
+    first_name varchar(20) NOT NULL,
+    last_name varchar(20) NOT NULL,
+    phone varchar(15) ,
+    email varchar(50),
+    st_address varchar(100), 
+    city_state varchar(50) , 
+    date_added timestamp NOT NULL,
+    doc_id integer NOT NULL,
+    FOREIGN KEY (doc_id) REFERENCES DOCTOR(doc_id)
+    );
+CREATE TABLE APPOINTMENT (
+    appt_id integer AUTO_INCREMENT PRIMARY KEY, 
+    appt_date date NOT NULL,
+    appt_time time NOT NULL,
+    doc_id integer NOT NULL,
+    pat_id integer NOT NULL,
+    syst_bp integer ,
+    diast_bp integer ,
+    pulse integer ,
+    notes text ,
+    FOREIGN Key (doc_id) REFERENCES DOCTOR(doc_id), 
+    FOREIGN KEY (pat_id) REFERENCES PATIENT(pat_id)
+    );
+CREATE TABLE MEDICINE (
+    med_id integer AUTO_INCREMENT PRIMARY KEY, 
+    med_name varchar(20) NOT NULL
+    );
+CREATE TABLE PATIENT_MEDICINE (
+    med_id integer NOT NULL,
+    dosage varchar(50) NOT NULL,
+    notes text,
+    pat_id integer NOT NULL, 
+    PRIMARY Key (med_id, dosage, pat_id), 
+    FOREIGN Key (med_id) REFERENCES MEDICINE(med_id), 
+    FOREIGN KEY (pat_id) REFERENCES PATIENT(pat_id)
+    );
+CREATE TABLE ALLERGY (
+    allergy_id integer AUTO_INCREMENT PRIMARY KEY, 
+    allergy_name varchar(100) NOT NULL
+    );
+CREATE TABLE PATIENT_ALLERGY (
+    pat_id integer NOT NULL, 
+    allergy_id integer NOT NULL, 
+    PRIMARY Key (pat_id, allergy_id), 
+    FOREIGN Key (pat_id) REFERENCES PATIENT(pat_id), 
+    FOREIGN KEY (allergy_id) REFERENCES ALLERGY(allergy_id)
+    );

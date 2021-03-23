@@ -1,12 +1,30 @@
 import mysql.connector
 
+from datetime import datetime
+now = datetime.now()
+
 #connection
 mydb = mysql.connector.connect(
   host="localhost",
   user="root",
   password="",
-  database="discord"
+  database="HospitalPython"
 )
+
+'''
+CREATE TABLE PATIENT (
+    pat_id integer AUTO_INCREMENT PRIMARY KEY, 
+    first_name varchar(20) NOT NULL,
+    last_name varchar(20) NOT NULL,
+    phone varchar(15) ,
+    email varchar(50),
+    st_address varchar(100), 
+    city_state varchar(50) , 
+    date_added timestamp NOT NULL,
+    doc_id integer NOT NULL,
+    FOREIGN KEY (doc_id) REFERENCES DOCTOR(doc_id)
+    );
+'''
 
 mycursor = mydb.cursor()
 
@@ -29,7 +47,7 @@ def show_menu():
 
 def show_all(mycursor):
 
-    mycursor.execute("SELECT * FROM firstnames")
+    mycursor.execute("SELECT * FROM Patient")
     myresult = mycursor.fetchall()
 
     for x in myresult:
@@ -40,8 +58,8 @@ def insert_student(mycursor):
     
     myname = take_string("name")
 
-    sql = "INSERT INTO firstnames(name) VALUES (%s)"
-    val = (myname, )
+    sql = "INSERT INTO PATIENT(first_name, last_name, date_added, doc_id) VALUES (%s, %s, %s, %s)"
+    val = (myname, "Lastnameson", now, "1" )
 
     mycursor.execute(sql, val)
 

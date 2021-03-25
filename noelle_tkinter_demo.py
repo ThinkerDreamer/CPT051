@@ -6,16 +6,32 @@ now = datetime.now()
 
 #text_box.insert("1.0", "Hello")
 
-def handle_click(event):
-    print("The button was clicked!")
+def handle_click_showall(event):
+    show_all(mycursor)
 
 def show_all(mycursor):
 
     mycursor.execute("SELECT * FROM Patient")
     myresult = mycursor.fetchall()
 
+    count = 0
     for x in myresult:
-        print(x)
+        count += 1
+        #print(x)
+        ind = str(count)
+        ind = "0." + ind
+        text_box.insert(ind, x)
+
+#connection
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="root",
+  password="",
+  database="HospitalPython"
+)
+
+#define cursor
+mycursor = mydb.cursor()
 
 window = tk.Tk()
 
@@ -29,9 +45,9 @@ button = tk.Button(
 )
 button.pack()
 
-button.bind("<Button-1>", handle_click)
+button.bind("<Button-1>", handle_click_showall)
 
-text_box = tk.Text(height = 26, width = 52)
+text_box = tk.Text(height = 26, width = 200)
 text_box.pack()
 
 
